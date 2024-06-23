@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+:root {
+    font-family: Poppins, sans-serif;
+}
+
+li {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    transition: all .2s ease-in-out;
+}
+
+li::after {
+    position: absolute;
+    content: '';
+    height: 4px;
+    width: 0;
+    background: #2a68ff;
+    right: 0;
+    bottom: 0;
+    transition: width .2s ease-in-out;
+}
+
+li:hover::after {
+    width: 100%;
+}
+
+
+.icon {
+    cursor: pointer;
+}
+
+.card {
+    background: white;
+}
