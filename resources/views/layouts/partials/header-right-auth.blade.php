@@ -1,9 +1,9 @@
 <div class="relative flex ml-3 space-x-4">
-    @can('view-admin', App\Models\User::class)
+    {{-- @can('view-admin', App\Models\User::class)
         <x-nav-link :navigate='false' href="{{ route('filament.admin.auth.login') }}" :active="request()->routeIs('filament.admin.auth.login')">
-            {{ __('menu.admin') }}
+            {{ __('header.admin') }}
         </x-nav-link>
-    @endcan
+    @endcan --}}
     <x-dropdown align="right" width="48">
         <x-slot name="trigger">
             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -30,11 +30,11 @@
         <x-slot name="content">
             <!-- Account Management -->
             <div class="block px-4 py-2 text-xs text-gray-400">
-                {{ __('menu.редактировать') }}
+                {{ __('header.edit') }}
             </div>
 
             <x-dropdown-link wire:navigate href="{{ route('profile.show') }}">
-                {{ __('menu.profile') }}
+                {{ __('header.profile') }}
             </x-dropdown-link>
 
             <div class="border-t border-gray-200"></div>
@@ -43,7 +43,7 @@
                 @csrf
 
                 <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                    {{ __('menu.logout') }}
+                    {{ __('header.logout') }}
                 </x-dropdown-link>
             </form>
         </x-slot>

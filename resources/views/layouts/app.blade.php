@@ -19,20 +19,24 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased">
-    <x-banner />
+<body class="flex flex-col min-h-screen font-sans antialiased">
+    <div class="flex-grow">
+        @include('layouts.partials.header')
 
-    @include('layouts.partials.header')
+        @yield('hero')
+    </div>
 
-    @yield('hero')
-
-    <main class="container flex flex-grow px-5 mx-auto">
+    <main class="container flex-grow flex-shrink-0 px-5 mx-auto">
         {{ $slot }}
     </main>
 
-    @include('layouts.partials.footer')
+    <footer class="mt-auto">
+        @include('layouts.partials.footer')
+    </footer>
 
     @stack('modals')
+    @stack('script')
+    @stack('num-formatter-script')
     @livewireScripts
 </body>
 

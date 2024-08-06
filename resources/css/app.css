@@ -43,3 +43,8 @@ li:hover::after {
 .card {
     background: white;
 }
+.sticky {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0; /* Adjust this value if you want some space at the top when scrolling */
+}

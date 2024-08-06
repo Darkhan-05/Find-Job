@@ -1,5 +1,12 @@
 <?php
 
+use App\Models\City;
+use App\Models\Company;
+use App\Models\Country;
+use App\Models\EmploymentType;
+use App\Models\Position;
+use App\Models\User;
+use App\Models\VacancyStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,19 +20,21 @@ return new class extends Migration
     {
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->foreignId('company_id')->constrained()->cascadeOnDelete();
+            $table->string('description'); // Описание
             $table->string('responsibility'); // Обязанности
             $table->string('conditions'); // Условия
             $table->string('requirements'); // Требования
-            $table->foreignId('employement_type_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(EmploymentType::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Country::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(City::class)->constrained()->cascadeOnDelete();
             $table->integer('salary')->nullable();
             $table->date('posted_at')->useCurrent();
             $table->date('expired_at')->nullable();
-            $table->foreignId('status_id')->default(1)->required()->constrained()->cascadeOnDelete();
-            $table->foreignId('position_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(VacancyStatus::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Position::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
