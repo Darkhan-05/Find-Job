@@ -8,4 +8,5 @@ return [
     'already Applied' => 'Жауап берілді',
     'apply Now' => 'Қазір жауап беру',
     'submit' => 'Жіберу',
+    'no vacancies'=> 'Вакансия табылмады'
 ];

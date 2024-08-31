@@ -29,6 +29,7 @@ Route::middleware(SetLocale::class)->group(function () {
         'auth:sanctum',
         config('jetstream.auth_session'),
         'verified',
+        SetLocale::class
     ])->group(function () {
         Route::post('/vacancies/{vacancy}/apply', [VacancyController::class, 'apply'])->name('apply');
     });

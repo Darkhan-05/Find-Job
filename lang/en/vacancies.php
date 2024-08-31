@@ -8,4 +8,5 @@ return [
     'already Applied' => 'Already Applied',
     'apply Now' => 'Apply Now',
     'submit' => 'Submit',
+    'no vacancies'=> 'No Vacancies'
 ];

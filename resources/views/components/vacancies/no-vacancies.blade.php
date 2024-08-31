@@ -1,3 +1,3 @@
 <div class="py-80">
-    No Vacancies
+    {{ __('vacancies.no vacancies') }}
 </div>

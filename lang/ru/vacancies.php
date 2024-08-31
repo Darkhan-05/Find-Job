@@ -8,4 +8,5 @@ return [
     'already Applied' => 'Уже откликнулись',
     'apply Now' => 'Откликнуться',
     'submit' => 'Отправить',
+    'no vacancies'=> 'Нету Вакансий'
 ];
