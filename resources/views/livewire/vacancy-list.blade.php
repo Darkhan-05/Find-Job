@@ -1,35 +1,10 @@
-<div class="flex flex-wrap justify-center max-w-[900px] gap-3 px-3 flex-cols mb-28 md:gap-6">
-    <div class="fixed z-50 top-10 right-4">
-        @if (session('succes'))
-            <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
-                role="alert">
-                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                </svg>
-                <span class="sr-only">Info</span>
-                <div>
-                    <span class="font-medium">{{ session('succes') }}</span>
-                </div>
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
-                role="alert">
-                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                </svg>
-                <span class="sr-only">Info</span>
-                <div>
-                    <span class="font-medium">{{ session('error') }}</span>
-                </div>
-            </div>
-        @endif
+<div class="flex flex-wrap justify-center max-w-[900px] gap-3 px-3 mb-28 md:gap-6">
+    <div class="fixed top-4 right-4 z-50 w-64">
+        <x-success-alert />
+        <x-error-alert />
     </div>
 
+    <!-- Загрузка -->
     @if ($isLoading)
         <div wire:loading>
             <div class="flex items-center justify-center w-full h-full rounded-lg">
@@ -49,11 +24,20 @@
         </div>
     @endif
 
+    <!-- Вакансии -->
+
     @forelse ($vacancies as $vacancy)
-        <x-vacancies.vacancy-card :appliedvacancies="$this->userAppliedVacancies()" :resumes="$this->resumes" :vacancy="$vacancy" />
+        <div class="w-full" wire:key="vacancy-{{ $vacancy->id }}">
+            <x-vacancies.vacancy-card  :appliedvacancies="$userAppliedVacancies" :resumes="$resumes"
+                :vacancy="$vacancy" />
+        </div>
     @empty
         <x-vacancies.no-vacancies />
     @endforelse
 
-    <div>{{ $vacancies->links() }}</div>
+    <!-- Пагинация -->
+    <div wire:key="pagination">
+        {{ $vacancies->links() }}
+    </div>
+
 </div>

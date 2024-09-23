@@ -17,7 +17,7 @@
 
 
 <div
-    class="w-full p-5 mb-2 duration-500 bg-white shadow-md cursor-pointer grid-item group group/item rounded-xl hover:bg-blueColor shadow-greyIsh-400 hover:shadow-xl">
+    class="w-full p-5 mb-2 duration-500 bg-white shadow-md grid-item group group/item rounded-xl hover:bg-blueColor shadow-greyIsh-400 hover:shadow-xl">
     <div class="flex items-center justify-between gap-4">
         <h1 class="text-lg font-semibold text-textColor group-hover:text-white">{{ $vacancy->name }}</h1>
         <span class="flex items-center text-md text-textColor group-hover:text-white">
@@ -52,10 +52,6 @@
                     <button>
                         {{ __('vacancies.already Applied') }}
                     </button>
-                    {{-- <button
-                        class="px-8 py-3 transition-all duration-200 bg-gray-200 border cursor-not-allowed text-textColor rounded-xl active:bg-gray-300">
-                        Already Applied
-                    </button> --}}
                 </div>
             @else
                 <a @click="showModal = true"
@@ -69,45 +65,47 @@
                 {{ __('vacancies.apply Now') }}
             </a>
         @endif
-
-        <div x-show="showModal" @close-modal.window="showModal = false" x-transition.duration.300ms
-            class="fixed inset-0 z-50 flex items-center justify-center bg-[#8f8f8f] bg-opacity-50"
-            @click.self="showModal = false">
-            <div class="w-full max-w-md p-8 bg-white rounded-lg" @click.stop>
-                <button @click="showModal = false" class="absolute top-2 right-2">
+        <div x-show="showModal" @close-modal.window="showModal = false"
+            x-transition.duration.300ms class="w-full h-full fixed inset-0 z-50 flex items-center justify-center"
+            style="background: rgba(230, 230, 250, 0.6);" @click.self="showModal = false">
+            <div class="px-12 pt-10 pb-8 bg-white rounded-lg shadow-lg relative" @click.stop>
+                <button @click="showModal = false"
+                    class="a cursor-pointer absolute top-4 right-4 text-gray-500 hover:text-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="w-14 h-14">
+                        class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <div class="text-xl font-semibold">{{ __('vacancies.apply to vacancy') }}: </div>
-                <div class="mb-4 text-md text-textColor">
+                <div class="text-2xl font-bold text-gray-800">{{ __('vacancies.apply to vacancy') }}: </div>
+                <div class="mb-3 text-lg text-gray-600">
                     «{{ $vacancy->name }}»
                 </div>
-                <h2 class="mb-2 text-lg font-bold">{{ __('vacancies.resume for the application') }}</h2>
-                <div>
+                <h2 class="mb-4 text-xl font-semibold text-gray-800">{{ __('vacancies.resume for the application') }}
+                </h2>
+                <div class="space-y-3">
                     <input wire:model.defer="selectedVacancy" type="hidden" name="vacancy_id"
                         value="{{ $vacancy->id }}">
                     @if ($resumes)
                         @foreach ($resumes as $resume)
-                            <div class="flex items-center gap-2 mb-1">
+                            <div class="flex items-center gap-3 mb-2">
                                 <input wire:model='selectedResume' type="radio" name="resume_id"
                                     value="{{ $resume->id }}" class="hover:opacity-70">
-                                <label>{{ $resume->first_name }}</label>
+                                <label class="text-gray-700">{{ $resume->first_name }}</label>
                             </div>
                         @endforeach
                     @else
-                        <div class="p-8 text-center">
+                        <div class="p-6 text-center text-gray-600">
                             <div>{{ __("vacancies.you don't have a resume") }}</div>
                             <div>
-                                <a class="text-blueColor" href="#">{{ __('vacancies.create vacancy') }}</a>
+                                <a class="text-blueColor hover:text-blue-500"
+                                    href="#">{{ __('vacancies.create resume') }}</a>
                             </div>
                         </div>
                     @endif
-                    <div class="flex justify-end">
+                    <div class="flex justify-end mt-6">
                         <button wire:click="apply({{ $vacancy->id }})" type="button"
-                            class="px-4 py-2 text-white cursor-pointer bg-blueColor rounded-xl active:bg-blue-700 hover:bg-blue-500">
+                            class="px-5 py-2 bg-blueColor text-white rounded-lg hover:bg-blue-500 focus:outline-none active:bg-blue-700 focus:ring-2 focus:ring-blue-700">
                             {{ __('vacancies.submit') }}
                         </button>
                     </div>

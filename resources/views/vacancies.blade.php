@@ -13,9 +13,4 @@
             </div>
         </div>
     </div>
-    @push('script')
-        <script>
-            console.log("hello world")
-        </script>
-    @endpush
 </x-app-layout>

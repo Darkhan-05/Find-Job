@@ -12,6 +12,7 @@ class Sort extends Component
     public function setSortBy()
     {
         $this->dispatch('sortUpdated', $this->sortBy);
+        $this->dispatch('loading', true);
     }
 
     public function render()

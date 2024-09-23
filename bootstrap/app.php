@@ -14,8 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->append([
-            SetLocale::class,
+        $middleware->alias([
+            'setlocale' => \App\Http\Middleware\SetLocale::class, // Добавьте эту строку
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

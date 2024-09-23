@@ -11,10 +11,6 @@ class SearchBox extends Component
     #[Url]
     public $search = '';
 
-    public function clearSearch()
-    {
-        $this->search = '';
-    }
 
     public function update()
     {

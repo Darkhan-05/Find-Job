@@ -23,8 +23,9 @@ class VacancyList extends Component
     public $selectedResume = [];
     public $selectedVacancy;
 
+
     public $isLoading = false;
-    public $sortBy = 'new';
+    public $sortBy;
 
     #[Url]
     public $search = '';
@@ -69,6 +70,7 @@ class VacancyList extends Component
         $this->sortBy = $sortBy;
     }
 
+    #[Computed]
     public function vacancies()
     {
         return Vacancy::query()
@@ -99,10 +101,9 @@ class VacancyList extends Component
                     $query->orderBy('created_at', 'asc');
                 }
             })
-            ->paginate(10);
+            ->paginate(8);
     }
 
-    #[Computed]
     public function resumes()
     {
         $user = auth()->user();
@@ -114,6 +115,7 @@ class VacancyList extends Component
 
     public function apply($vacancyId)
     {
+
         $this->selectedVacancy = $vacancyId;
 
         $user = auth()->user();
@@ -122,8 +124,7 @@ class VacancyList extends Component
         }
 
         if (!$this->selectedResume || !$this->selectedVacancy) {
-            dd('error');
-            return;
+            return $this->dispatch('showerror');
         }
 
         $user->vacancies()->create([
@@ -134,16 +135,20 @@ class VacancyList extends Component
 
         $this->selectedResume = [];
         $this->selectedVacancy = null;
-
-        return redirect()->back()->with('success', 'Отлично резюме отправлено');
+        $this->dispatch('showalert');
+        return redirect()->back();
     }
 
     public function render()
     {
+        $userAppliedVacancies = $this->userAppliedVacancies();
+        $resumes = $this->resumes();
         $vacancies = $this->vacancies();
 
         return view('livewire.vacancy-list', [
-            'vacancies' => $vacancies
+            'vacancies' => $vacancies,
+            'resumes'=> $resumes,
+            'userAppliedVacancies'=> $userAppliedVacancies,
         ]);
     }
 }

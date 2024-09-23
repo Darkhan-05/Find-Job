@@ -32,6 +32,7 @@
                     <option {{ session('locale') === $locale ? 'selected' : '' }} value="{{ $locale }}">
                         {{ $locale }}
                     </option>
+                    {{-- {{app()->getLocale();}} --}}
                 @endforeach
             </select>
         </form>

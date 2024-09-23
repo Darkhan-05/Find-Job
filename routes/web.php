@@ -18,7 +18,8 @@ Route::get('/language', function () {
 })->name('locale');
 
 
-Route::middleware(SetLocale::class)->group(function () {
+
+Route::middleware(['setlocale'])->group(function () {
 
     Route::get('/', HomeController::class)
         ->name('home');
