@@ -65,8 +65,8 @@
                 {{ __('vacancies.apply Now') }}
             </a>
         @endif
-        <div x-show="showModal" @close-modal.window="showModal = false"
-            x-transition.duration.300ms class="w-full h-full fixed inset-0 z-50 flex items-center justify-center"
+        <div x-show="showModal" @close-modal.window="showModal = false" x-transition.duration.300ms
+            class="w-full h-full fixed inset-0 z-50 flex items-center justify-center"
             style="background: rgba(230, 230, 250, 0.6);" @click.self="showModal = false">
             <div class="px-12 pt-10 pb-8 bg-white rounded-lg shadow-lg relative" @click.stop>
                 <button @click="showModal = false"
@@ -104,9 +104,17 @@
                         </div>
                     @endif
                     <div class="flex justify-end mt-6">
-                        <button wire:click="apply({{ $vacancy->id }})" type="button"
+                        <button wire:loading.class="opacity-70" wire:loading.attr="disabled"
+                            wire:click="apply({{ $vacancy->id }})" type="button"
                             class="px-5 py-2 bg-blueColor text-white rounded-lg hover:bg-blue-500 focus:outline-none active:bg-blue-700 focus:ring-2 focus:ring-blue-700">
-                            {{ __('vacancies.submit') }}
+
+                            <span wire:loading>
+                                {{ __('vacancies.loading') }}...
+                            </span>
+
+                            <span wire:loading.remove>
+                                {{ __('vacancies.submit') }}
+                            </span>
                         </button>
                     </div>
                 </div>

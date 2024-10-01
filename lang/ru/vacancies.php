@@ -8,5 +8,6 @@ return [
     'already Applied' => 'Уже откликнулись',
     'apply Now' => 'Откликнуться',
     'submit' => 'Отправить',
-    'no vacancies'=> 'Нету Вакансий'
+    'nothing found'=> 'Ничего не найдено',
+    'loading' => 'Загрузка',
 ];

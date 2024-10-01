@@ -1,8 +1,6 @@
 <div class="flex flex-wrap justify-center max-w-[900px] gap-3 px-3 mb-28 md:gap-6">
-    <div class="fixed top-4 right-4 z-50 w-64">
         <x-success-alert />
         <x-error-alert />
-    </div>
 
     <!-- Загрузка -->
     @if ($isLoading)

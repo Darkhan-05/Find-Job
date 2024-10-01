@@ -9,12 +9,11 @@ class SearchBox extends Component
 {
 
     #[Url]
-    public $search = '';
-
+    public $query = '';
 
     public function update()
     {
-        $this->dispatch('search', search: $this->search);
+        $this->dispatch('query', query: $this->query);
         $this->dispatch('loading', true);
     }
 

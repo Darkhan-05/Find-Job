@@ -10,6 +10,6 @@ return [
     'edit' => 'Edit',
     'profile' => 'Profile',
     'logout' => 'Logout',
-    'login' => 'Login',
-    'register' => ' Register',
+    'login' => 'Sign In',
+    'register' => ' Sign Up',
 ];

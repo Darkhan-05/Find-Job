@@ -1,6 +1,6 @@
 <div x-data="{ showSuccessAlert: false }" @showalert.window="showSuccessAlert = true; setTimeout(() => showSuccessAlert = false, 3000)"
     role="alert"
-    class="rounded-xl border-2 border-gray-300 bg-white fixed p-4 right-4 top-4 max-w-sm transform transition-all duration-500 ease-in-out"
+    class="rounded-xl border-2 border-gray-300 bg-white fixed p-4 right-4 top-10 max-w-sm transform transition-all duration-500 ease-in-out"
     :class="showSuccessAlert ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'">
     <div class="flex items-start gap-4">
         <span class="text-green-600">

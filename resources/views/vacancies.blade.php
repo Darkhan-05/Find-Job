@@ -5,7 +5,7 @@
             <div class="flex items-center justify-center">
                 <div class="flex gap-6 px-6 py-6 bg-white border rounded-lg shadow">
                     <livewire:filter />
-                    <div class="min-w-[900px]">
+                    <div class="xl:min-w-[900px]">
                         <livewire:sort />
                         <livewire:vacancy-list lazy />
                     </div>

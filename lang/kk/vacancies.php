@@ -8,5 +8,6 @@ return [
     'already Applied' => 'Сілтеме жіберілді',
     'apply Now' => 'Cілтеме жіберу',
     'submit' => 'Жіберу',
-    'no vacancies'=> 'Вакансия табылмады'
+    'nothing found'=> 'Ештеңе табылмады',
+    'loading' => 'Жіберілуде',
 ];

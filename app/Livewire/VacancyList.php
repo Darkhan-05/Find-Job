@@ -15,20 +15,21 @@ class VacancyList extends Component
 {
     use WithPagination;
 
+    private $pagination = 8;
 
     public $selectedEmploymentTypes, $selectedPositions, $selectedCountries, $selectedCities = [];
     #[Url]
     public $minSalary, $maxSalary;
 
     public $selectedResume = [];
-    public $selectedVacancy;
+    private $selectedVacancy;
 
 
     public $isLoading = false;
     public $sortBy;
 
     #[Url]
-    public $search = '';
+    public $query = '';
 
     public function placeholder()
     {
@@ -46,10 +47,11 @@ class VacancyList extends Component
         $this->maxSalary = $maxSalary;
     }
 
-    #[On('search')]
-    public function searchUpdated($search)
+    #[On('query')]
+    public function queryUpdated($query)
     {
-        $this->search = $search;
+        $this->query = $query;
+        $this->setPage(1); // Во избежаний ошибки из за пагинаций с поиском
     }
 
     #[On('loading')]
@@ -58,7 +60,7 @@ class VacancyList extends Component
         $this->isLoading = true;
     }
 
-    public function userAppliedVacancies()
+    private function userAppliedVacancies()
     {
         $user = auth()->user();
         return $user ? $user->vacancies : [];
@@ -75,7 +77,7 @@ class VacancyList extends Component
     {
         return Vacancy::query()
             ->isPublished()
-            ->where('name', 'like', "%{$this->search}%")
+            ->where('name', 'like', "%{$this->query}%")
             ->when($this->selectedCountries, function ($query) {
                 $query->whereIn('country_id', $this->selectedCountries);
             })
@@ -101,7 +103,7 @@ class VacancyList extends Component
                     $query->orderBy('created_at', 'asc');
                 }
             })
-            ->paginate(8);
+            ->paginate($this->pagination);
     }
 
     public function resumes()
@@ -147,8 +149,8 @@ class VacancyList extends Component
 
         return view('livewire.vacancy-list', [
             'vacancies' => $vacancies,
-            'resumes'=> $resumes,
-            'userAppliedVacancies'=> $userAppliedVacancies,
+            'resumes' => $resumes,
+            'userAppliedVacancies' => $userAppliedVacancies,
         ]);
     }
 }

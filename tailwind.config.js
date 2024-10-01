@@ -17,7 +17,7 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'blueColor': '#2a68ff',
+                'blueColor': 'rgb(59 130 246)',
                 'greyIsh': '#f1f4f8',
                 'cardShadow': '#f7f8f9',
                 'textColor': '#252b36'

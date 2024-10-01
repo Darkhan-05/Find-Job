@@ -20,7 +20,7 @@ li {
     transition: all .2s ease-in-out;
 }
 
-li::after {
+li.line::after {
     position: absolute;
     content: '';
     height: 4px;
@@ -31,7 +31,7 @@ li::after {
     transition: width .2s ease-in-out;
 }
 
-li:hover::after {
+li.line:hover::after {
     width: 100%;
 }
 
